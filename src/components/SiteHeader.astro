@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../assets/logo.png';
+import { site } from '../data/site';
+
+/**
+ * The header sits on charcoal because the logo's wordmark is the lighter orange
+ * (#FFA737), which measures 1.77:1 on the offwhite background. Logos are exempt
+ * from contrast rules, but it looks washed out there and reads cleanly here.
+ *
+ * There is no mobile menu: three anchors and a single action do not justify a
+ * disclosure widget or the JavaScript to run it. Below `sm` the anchors give way
+ * to the one action that matters.
+ */
+const navigation = [
+  { href: '#how-it-works', label: 'How it works' },
+  { href: '#what-you-get', label: 'What you get' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<header data-surface="dark" class="bg-surface-dark text-foreground-inverse">
+  <div class="mx-auto flex max-w-page items-center justify-between gap-4 px-gutter py-4">
+    <a href="/" class="shrink-0" aria-label={`${site.name} home`}>
+      <!-- Rendered at 48-56px tall, so 200px wide covers a 2x display without
+           emitting the full 3000px original as a fallback. -->
+      <Image src={logo} alt="" width={200} loading="eager" class="h-12 w-auto sm:h-14" />
+    </a>
+
+    <nav aria-label="Primary" class="hidden items-center gap-8 sm:flex">
+      {
+        navigation.map(({ href, label }) => (
+          <a
+            href={href}
+            class="py-2 text-label text-foreground-inverse-muted transition-colors duration-(--duration-fast) ease-standard hover:text-foreground-inverse"
+          >
+            {label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a href={`mailto:${site.salesEmail}`} class="btn btn-primary shrink-0"> Email us </a>
+  </div>
+</header>

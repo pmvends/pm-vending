@@ -1,0 +1,167 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@layer base {
+  html {
+    /* Prevent iOS Safari from enlarging text in landscape. */
+    -webkit-text-size-adjust: 100%;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+  }
+
+  body {
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Keyboard focus only. Every interactive element inherits this; components
+     may restyle it but must not remove it. */
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* The ink focus ring is invisible on the dark surface, so that scope swaps in
+     the accent orange (7.71:1 against #272727). */
+  [data-surface="dark"] {
+    --color-focus: var(--color-accent);
+  }
+
+  /* Anchor navigation between sections should not jump abruptly, but honour a
+     stated preference for reduced motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/**
+ * Buttons and links are defined once here rather than repeated as long utility
+ * strings across the header, hero, contact form, and thanks page. They are plain
+ * classes instead of a component because they wrap nothing: the element is
+ * sometimes an anchor and sometimes a button, and the markup should say which.
+ */
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* WCAG 2.2 target size minimum. */
+    min-height: 44px;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-size: var(--text-label);
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    transition:
+      background-color var(--duration-fast) var(--ease-standard),
+      border-color var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard);
+  }
+
+  .btn-primary {
+    background-color: var(--color-brand);
+    color: var(--color-brand-foreground);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-brand-hover);
+  }
+  .btn-primary:active {
+    background-color: var(--color-brand-active);
+  }
+
+  .btn-secondary {
+    border: 1px solid var(--color-border-strong);
+    color: var(--color-foreground);
+  }
+  .btn-secondary:hover {
+    background-color: var(--color-background-subtle);
+  }
+
+  /* The light-surface border and ink disappear against charcoal. */
+  [data-surface='dark'] .btn-secondary {
+    border-color: var(--color-border-inverse);
+    color: var(--color-foreground-inverse);
+  }
+  [data-surface='dark'] .btn-secondary:hover {
+    background-color: var(--color-surface-dark-subtle);
+  }
+
+  .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  /**
+   * `:user-invalid` fires only after the visitor has actually interacted with a
+   * field, unlike `:invalid`, which would mark every required field red before
+   * they had typed anything. The border thickens as well as changing colour, so
+   * the state is not carried by colour alone.
+   */
+  input:user-invalid,
+  textarea:user-invalid {
+    border-color: var(--color-danger);
+    border-width: 2px;
+  }
+
+  /* Moved off-screen rather than hidden, so it stays reachable by keyboard. */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    z-index: 10;
+    padding: 0.75rem 1.25rem;
+    background-color: var(--color-brand);
+    color: var(--color-brand-foreground);
+    font-size: var(--text-label);
+    font-weight: 600;
+  }
+  .skip-link:focus {
+    left: 0.5rem;
+    top: 0.5rem;
+  }
+
+  /* Inline text links. Underlined by default so they never rely on colour. */
+  .link {
+    color: var(--color-brand-ink);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+  .link:hover {
+    color: var(--color-foreground);
+  }
+  [data-surface='dark'] .link {
+    color: var(--color-accent);
+  }
+  [data-surface='dark'] .link:hover {
+    color: var(--color-foreground-inverse);
+  }
+}

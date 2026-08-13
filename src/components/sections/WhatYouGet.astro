@@ -1,0 +1,52 @@
+---
+import Section from '../Section.astro';
+
+/**
+ * The competitive point the owner actually stands behind: the product list is
+ * agreed per site rather than fixed centrally. Claims about undercutting other
+ * operators were left out, because that was not confirmed.
+ */
+const included = [
+  {
+    term: 'Sized to your site',
+    description:
+      'The machine matches how many people are on site and the space you have for it.',
+  },
+  {
+    term: 'Snacks, drinks, or both',
+    description: 'Run one machine or a combination, depending on what the site needs.',
+  },
+  {
+    term: 'A product list you approve',
+    description:
+      'We agree what goes in before the machine arrives, and it can change once you see what sells.',
+  },
+  {
+    term: 'Tap to pay',
+    description: 'Card readers on the machine, so nobody has to find cash or exact change.',
+  },
+];
+---
+
+<Section id="what-you-get" surface="dark" labelledBy="what-you-get-heading">
+  <div class="max-w-[var(--measure-wide)]">
+    <h2 id="what-you-get-heading" class="text-h2">What goes in the machine is your call</h2>
+    <p class="mt-4 max-w-[var(--measure)] text-body-lg text-foreground-inverse-muted">
+      Stock is chosen for the site rather than set centrally. We ask what your team
+      actually eats and drinks, then build the selection around that and keep it filled.
+    </p>
+  </div>
+
+  <ul class="mt-12 grid gap-x-16 gap-y-8 sm:grid-cols-2">
+    {
+      included.map(({ term, description }) => (
+        <li class="border-t border-border-inverse pt-5">
+          <h3 class="font-heading text-h4">{term}</h3>
+          <p class="mt-2 max-w-[var(--measure)] text-body text-foreground-inverse-muted">
+            {description}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

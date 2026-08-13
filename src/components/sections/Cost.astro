@@ -1,0 +1,51 @@
+---
+import Section from '../Section.astro';
+
+/**
+ * The single most persuasive fact of the service, given its own section because
+ * "free machine" invites suspicion and the answer needs room to be plain.
+ *
+ * A definition list rather than three cards: these are three answers to one
+ * question, not three interchangeable objects.
+ */
+const terms = [
+  {
+    term: 'No placement fee',
+    description:
+      'You do not buy or lease the machine, and there is no charge for having it on site.',
+  },
+  {
+    term: 'No subscription',
+    description: 'Nothing monthly, nothing to renew, and no contract minimum to sign up to.',
+  },
+  {
+    term: 'Your team pays at the machine',
+    description:
+      'Purchases are made by card at the machine. Those sales are what fund the service, which is why it costs your business nothing.',
+  },
+];
+---
+
+<Section id="cost" labelledBy="cost-heading">
+  <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] lg:gap-20">
+    <div>
+      <h2 id="cost-heading" class="text-h2">What it costs your business</h2>
+      <p class="mt-4 max-w-[var(--measure-narrow)] text-body-lg text-foreground-muted">
+        Nothing. The machine is ours to supply, fill, and look after.
+      </p>
+    </div>
+
+    <dl>
+      {
+        terms.map(({ term, description }, index) => (
+          <div class:list={['border-t border-border py-6', index === 0 && 'lg:pt-0 lg:border-t-0']}>
+            <dt class="font-heading text-h4">{term}</dt>
+            <dd class="mt-2 max-w-[var(--measure)] text-body text-foreground-muted">
+              {description}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</Section>

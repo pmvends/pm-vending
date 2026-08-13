@@ -1,0 +1,31 @@
+---
+/**
+ * The page's one layout primitive: vertical rhythm, page gutters, max width and
+ * surface colour. Sections opt into the dark surface via `surface`, which also
+ * sets the data attribute that swaps the focus ring and link colours.
+ */
+interface Props {
+  id?: string;
+  surface?: 'light' | 'subtle' | 'dark';
+  labelledBy?: string;
+}
+
+const { id, surface = 'light', labelledBy } = Astro.props;
+
+const surfaceClass = {
+  light: 'bg-background text-foreground',
+  subtle: 'bg-background-subtle text-foreground',
+  dark: 'bg-surface-dark text-foreground-inverse',
+}[surface];
+---
+
+<section
+  id={id}
+  aria-labelledby={labelledBy}
+  data-surface={surface === 'dark' ? 'dark' : undefined}
+  class:list={['py-section', surfaceClass]}
+>
+  <div class="mx-auto max-w-page px-gutter">
+    <slot />
+  </div>
+</section>

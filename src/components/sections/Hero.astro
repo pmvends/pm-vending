@@ -1,0 +1,40 @@
+---
+import VendingMachine from '../VendingMachine.astro';
+import { site } from '../../data/site';
+
+/**
+ * The hero answers the question a facilities manager actually arrives with:
+ * a free machine sounds like it has a catch, so the lead paragraph says who
+ * pays before anything else is claimed.
+ *
+ * The schematic only appears from `lg`. It is decorative, and sharing the row
+ * any earlier squeezes the lead paragraph to roughly 35 characters a line. On
+ * smaller screens the space is better spent getting the offer and the action
+ * above the fold.
+ */
+---
+
+<div data-surface="dark" class="bg-surface-dark text-foreground-inverse">
+  <div class="mx-auto max-w-page px-gutter pb-section pt-16 sm:pt-20">
+    <div class="grid items-center gap-12 lg:grid-cols-[1.15fr_auto] lg:gap-16">
+      <div>
+        <h1 class="max-w-[18ch] text-display">Snack and drink vending for {site.serviceArea} workplaces</h1>
+
+        <p class="mt-6 max-w-[var(--measure)] text-body-lg text-foreground-inverse-muted">
+          We place the machine, keep it stocked, and service it. There is no placement fee
+          and no subscription for your business. Your team pays at the machine by tapping a
+          card.
+        </p>
+
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+          <a href={`mailto:${site.salesEmail}`} class="btn btn-primary"> Email us about your site </a>
+          <a href="#how-it-works" class="btn btn-secondary"> See how it works </a>
+        </div>
+      </div>
+
+      <div class="hidden justify-self-center lg:block">
+        <VendingMachine />
+      </div>
+    </div>
+  </div>
+</div>

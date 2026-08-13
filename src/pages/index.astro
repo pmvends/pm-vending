@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Hero from '../components/sections/Hero.astro';
+import Cost from '../components/sections/Cost.astro';
+import HowItWorks from '../components/sections/HowItWorks.astro';
+import WhatYouGet from '../components/sections/WhatYouGet.astro';
+import Contact from '../components/sections/Contact.astro';
+import { getImage } from 'astro:assets';
+import logo from '../../assets/logo.png';
+import { site } from '../data/site';
+
+/**
+ * Generated rather than pointing at `logo.src`, which would make the build emit
+ * the full 3000px original purely to satisfy a URL that only crawlers read.
+ */
+const schemaLogo = await getImage({ src: logo, width: 512, format: 'png' });
+
+const description = `${site.name} places, stocks, and services snack and drink vending machines for offices and warehouses across ${site.serviceArea}. No placement fee and no subscription.`;
+
+/**
+ * Every value below is a confirmed fact. There is no rating, review, price, or
+ * founding date here, because none of those have been established.
+ */
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: new URL('', Astro.site).href,
+  logo: new URL(schemaLogo.src, Astro.site).href,
+  email: site.salesEmail,
+  description,
+  areaServed: { '@type': 'AdministrativeArea', name: site.serviceArea },
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: site.salesEmail,
+      areaServed: site.serviceArea,
+      hoursAvailable: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '08:30',
+        closes: '17:00',
+      },
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: site.supportEmail,
+      areaServed: site.serviceArea,
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${site.name} | Snack and drink vending for ${site.serviceArea} workplaces`}
+  description={description}
+>
+  <script
+    slot="head"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(organizationSchema)}
+  />
+
+  <SiteHeader />
+  <main id="main">
+    <Hero />
+    <Cost />
+    <HowItWorks />
+    <WhatYouGet />
+    <Contact />
+  </main>
+  <SiteFooter />
+</BaseLayout>

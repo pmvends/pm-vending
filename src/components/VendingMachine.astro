@@ -1,0 +1,108 @@
+---
+/**
+ * A flat schematic of a snack and drink machine, drawn in the brand's own
+ * colours and echoing the stepped slots in the logo mark.
+ *
+ * It is deliberately diagrammatic rather than photographic: there are no
+ * photographs of installed machines to use, and rendering a realistic one would
+ * imply specific equipment that has not been confirmed. The card reader is the
+ * only element picked out in the action colour, because tap payment is a real
+ * and confirmed part of the service.
+ *
+ * Decorative: the surrounding copy carries the meaning, so it is hidden from
+ * assistive technology rather than announced twice.
+ */
+const shelves = [30, 96, 162, 228];
+const columns = [32, 68, 104, 140];
+---
+
+<svg
+  viewBox="0 0 280 400"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  focusable="false"
+  class="h-auto w-full max-w-[320px]"
+>
+  <!-- Cabinet -->
+  <rect
+    x="10"
+    y="6"
+    width="260"
+    height="366"
+    rx="4"
+    fill="var(--color-surface-dark-subtle)"
+    stroke="var(--color-border-inverse)"
+    stroke-width="2"></rect>
+
+  <!-- Product window -->
+  <rect x="26" y="22" width="150" height="258" fill="var(--color-background)"></rect>
+
+  {
+    shelves.map((y, row) => (
+      <>
+        {columns.map((x, col) => (
+          <rect
+            x={x}
+            y={y}
+            width="30"
+            height="40"
+            rx="1"
+            fill={(row + col) % 2 === 0 ? 'var(--color-brand)' : 'var(--color-accent)'}
+          />
+        ))}
+        <rect x="26" y={y + 46} width="150" height="2" fill="var(--color-border)" />
+      </>
+    ))
+  }
+
+  <!-- Control column -->
+  <rect x="190" y="22" width="64" height="258" fill="var(--color-surface-dark)"></rect>
+
+  <!-- Selection display -->
+  <rect
+    x="202"
+    y="36"
+    width="40"
+    height="20"
+    rx="1"
+    fill="var(--color-surface-dark-subtle)"
+    stroke="var(--color-border-inverse)"
+    stroke-width="1"></rect>
+
+  <!-- Card reader, the one element in the action colour -->
+  <rect x="202" y="70" width="40" height="28" rx="2" fill="var(--color-accent)"></rect>
+  <rect x="210" y="80" width="24" height="3" rx="1.5" fill="var(--color-surface-dark)"></rect>
+  <rect x="210" y="88" width="16" height="3" rx="1.5" fill="var(--color-surface-dark)"></rect>
+
+  <!-- Keypad -->
+  {
+    [0, 1, 2, 3].map((r) =>
+      [0, 1, 2].map((c) => (
+        <circle
+          cx={210 + c * 12}
+          cy={120 + r * 14}
+          r="3.5"
+          fill="var(--color-foreground-subtle)"
+        />
+      )),
+    )
+  }
+
+  <!-- Delivery bin -->
+  <rect
+    x="26"
+    y="296"
+    width="228"
+    height="58"
+    rx="2"
+    fill="var(--color-surface-dark)"
+    stroke="var(--color-border-inverse)"
+    stroke-width="2"></rect>
+  <rect x="42" y="312" width="196" height="26" rx="1" fill="var(--color-surface-dark-subtle)"
+  ></rect>
+
+  <!-- Plinth -->
+  <rect x="26" y="372" width="30" height="16" fill="var(--color-surface-dark)"></rect>
+  <rect x="224" y="372" width="30" height="16" fill="var(--color-surface-dark)"></rect>
+</svg>

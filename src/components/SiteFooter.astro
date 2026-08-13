@@ -1,0 +1,53 @@
+---
+import { site } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer
+  data-surface="dark"
+  class="border-t border-border-inverse bg-surface-dark text-foreground-inverse"
+>
+  <div
+    class="mx-auto flex max-w-page flex-col gap-6 px-gutter py-10 sm:flex-row sm:items-baseline sm:justify-between"
+  >
+    <div>
+      <p class="font-heading text-h4">{site.name}</p>
+      <p class="mt-1 text-body-sm text-foreground-inverse-muted">
+        Snack and drink vending for {site.serviceArea} workplaces.
+      </p>
+    </div>
+
+    {/* Labelled by purpose rather than listed as two bare addresses, so an
+        existing customer with a jammed machine does not email sales. */}
+    <dl class="grid gap-4 text-body-sm sm:grid-cols-2 sm:gap-10">
+      <div>
+        <dt class="text-foreground-inverse-muted">New enquiries</dt>
+        <dd class="mt-0.5">
+          <a href={`mailto:${site.salesEmail}`} class="link inline-block py-1"
+            >{site.salesEmail}</a
+          >
+        </dd>
+      </div>
+      <div>
+        <dt class="text-foreground-inverse-muted">Existing customers</dt>
+        <dd class="mt-0.5">
+          <a href={`mailto:${site.supportEmail}`} class="link inline-block py-1"
+            >{site.supportEmail}</a
+          >
+        </dd>
+      </div>
+      <div class="sm:col-span-2">
+        <dt class="text-foreground-inverse-muted">Office hours</dt>
+        <dd class="mt-0.5">{site.hours.label}</dd>
+      </div>
+    </dl>
+  </div>
+
+  <div class="mx-auto max-w-page px-gutter pb-8">
+    <p class="text-caption text-foreground-inverse-muted">
+      &copy; {year}
+      {site.name}
+    </p>
+  </div>
+</footer>

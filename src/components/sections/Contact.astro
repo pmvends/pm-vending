@@ -1,0 +1,45 @@
+---
+import Section from '../Section.astro';
+import ContactForm from '../ContactForm.astro';
+import { site } from '../../data/site';
+
+/**
+ * Email is presented first and as plain text, because it is the channel that
+ * definitely works today. The form is the convenience, not the only route.
+ */
+---
+
+<Section id="contact" labelledBy="contact-heading">
+  <div class="grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:gap-20">
+    <div>
+      <h2 id="contact-heading" class="text-h2">Tell us about your site</h2>
+      <p class="mt-4 max-w-[var(--measure-narrow)] text-body-lg text-foreground-muted">
+        Send us your location and roughly how many people are on site, and we will come
+        back with what we would put in.
+      </p>
+
+      <dl class="mt-10 space-y-6">
+        <div>
+          <dt class="text-label font-medium text-foreground-muted">Email</dt>
+          <dd class="mt-1 text-body-lg">
+            <!-- inline-block with padding so this standalone link clears the
+                 24px target minimum; links inside a sentence are exempt. -->
+            <a href={`mailto:${site.salesEmail}`} class="link inline-block py-1">{site.salesEmail}</a>
+          </dd>
+        </div>
+        <div>
+          <dt class="text-label font-medium text-foreground-muted">Office hours</dt>
+          <dd class="mt-1 text-body-lg">{site.hours.label}</dd>
+        </div>
+        <div>
+          <dt class="text-label font-medium text-foreground-muted">Service area</dt>
+          <dd class="mt-1 text-body-lg">{site.serviceArea}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div>
+      <ContactForm />
+    </div>
+  </div>
+</Section>

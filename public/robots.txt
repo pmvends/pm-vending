@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pmvends.com/sitemap-index.xml

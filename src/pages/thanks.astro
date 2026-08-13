@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Section from '../components/Section.astro';
+import { site } from '../data/site';
+
+/**
+ * Where Formspree returns the visitor after a successful submission, via the
+ * `_next` field on the form. Kept out of search results because it only makes
+ * sense immediately after sending something.
+ */
+---
+
+<BaseLayout
+  title={`Thanks | ${site.name}`}
+  description="Your enquiry has been sent to PM Vending."
+  noindex
+>
+  <SiteHeader />
+  <main id="main">
+    <Section labelledBy="thanks-heading">
+      <div class="max-w-[var(--measure)]">
+        <h1 id="thanks-heading" class="text-h1">Thanks, that has come through</h1>
+        <p class="mt-4 text-body-lg text-foreground-muted">
+          We read enquiries during office hours, {site.hours.label}, and will come back to
+          you with what we would put in the machine.
+        </p>
+        <p class="mt-6 text-body">
+          If you need to add anything, reply to us at <a
+            href={`mailto:${site.salesEmail}`}
+            class="link">{site.salesEmail}</a
+          >.
+        </p>
+        <p class="mt-10">
+          <a href="/" class="btn btn-secondary">Back to the homepage</a>
+        </p>
+      </div>
+    </Section>
+  </main>
+  <SiteFooter />
+</BaseLayout>

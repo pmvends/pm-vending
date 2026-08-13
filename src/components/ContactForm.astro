@@ -1,0 +1,85 @@
+---
+import { site, formspreeId } from '../data/site';
+
+/**
+ * A plain HTML form. No JavaScript is loaded for it at all: the browser handles
+ * validation through `required` and `type="email"`, and Formspree handles the
+ * POST that GitHub Pages cannot.
+ *
+ * Until the Formspree id is set, the form targets a mailto: address so an
+ * enquiry opens the sender's mail client rather than disappearing. The address
+ * is also printed next to the button, so there is always a route that works.
+ */
+const endpoint = formspreeId
+  ? `https://formspree.io/f/${formspreeId}`
+  : `mailto:${site.salesEmail}`;
+
+// Formspree returns the visitor here instead of showing its own page.
+const redirectTo = new URL('thanks', Astro.site).href;
+
+const fieldClass =
+  'mt-1.5 w-full rounded-sm border border-border-strong bg-surface px-3 py-2.5 text-body text-foreground';
+const labelClass = 'block text-label font-medium';
+---
+
+<form
+  action={endpoint}
+  method="POST"
+  enctype={formspreeId ? undefined : 'text/plain'}
+  class="grid gap-5"
+>
+  {formspreeId && <input type="hidden" name="_next" value={redirectTo} />}
+  {formspreeId && <input type="hidden" name="_subject" value="Vending enquiry from the website" />}
+
+  {/* Formspree discards submissions that fill this in. Hidden from everyone,
+      including screen readers, because it is not a real question. */}
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" hidden />
+
+  <div>
+    <label for="name" class={labelClass}>
+      Your name <span class="font-normal text-foreground-muted">(required)</span>
+    </label>
+    <input id="name" name="name" type="text" required autocomplete="name" class={fieldClass} />
+  </div>
+
+  <div>
+    <label for="email" class={labelClass}>
+      Email <span class="font-normal text-foreground-muted">(required)</span>
+    </label>
+    <input id="email" name="email" type="email" required autocomplete="email" class={fieldClass} />
+  </div>
+
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div>
+      <label for="company" class={labelClass}>Company</label>
+      <input
+        id="company"
+        name="company"
+        type="text"
+        autocomplete="organization"
+        class={fieldClass}
+      />
+    </div>
+    <div>
+      <label for="location" class={labelClass}>Town or suburb</label>
+      <input id="location" name="location" type="text" class={fieldClass} />
+    </div>
+  </div>
+
+  <div>
+    <label for="headcount" class={labelClass}>Roughly how many people are on site</label>
+    <input id="headcount" name="headcount" type="text" inputmode="numeric" class={fieldClass} />
+  </div>
+
+  <div>
+    <label for="message" class={labelClass}>Anything else</label>
+    <textarea id="message" name="message" rows="4" class={fieldClass}></textarea>
+  </div>
+
+  <div class="flex flex-wrap items-center gap-x-4 gap-y-3">
+    <button type="submit" class="btn btn-primary">Send enquiry</button>
+    <p class="text-body-sm text-foreground-muted">
+      Or email <a href={`mailto:${site.salesEmail}`} class="link">{site.salesEmail}</a> directly.
+    </p>
+  </div>
+</form>
