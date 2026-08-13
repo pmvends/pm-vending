@@ -43,6 +43,8 @@ const navigation = [
       }
     </nav>
 
-    <a href={`mailto:${site.salesEmail}`} class="btn btn-primary shrink-0"> Email us </a>
+    <!-- Goes to the form, not a mailto:, which silently does nothing when no
+         default mail client is registered. -->
+    <a href="#contact" class="btn btn-primary shrink-0">Get in touch</a>
   </div>
 </header>

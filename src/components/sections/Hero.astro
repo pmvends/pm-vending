@@ -11,6 +11,13 @@ import { site } from '../../data/site';
  * any earlier squeezes the lead paragraph to roughly 35 characters a line. On
  * smaller screens the space is better spent getting the offer and the action
  * above the fold.
+ *
+ * The primary action goes to the form rather than a mailto: link. A mailto:
+ * does nothing at all when the visitor has no default mail client registered,
+ * which is common on desktop for anyone using webmail, and a headline button
+ * that silently fails is the worst thing on a page built to collect enquiries.
+ * The address is still shown as text in the contact section and footer for
+ * people who would rather email.
  */
 ---
 
@@ -27,8 +34,8 @@ import { site } from '../../data/site';
         </p>
 
         <div class="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-          <a href={`mailto:${site.salesEmail}`} class="btn btn-primary"> Email us about your site </a>
-          <a href="#how-it-works" class="btn btn-secondary"> See how it works </a>
+          <a href="#contact" class="btn btn-primary">Tell us about your site</a>
+          <a href="#how-it-works" class="btn btn-secondary">See how it works</a>
         </div>
       </div>
 
