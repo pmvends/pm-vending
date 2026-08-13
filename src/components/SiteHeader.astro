@@ -5,11 +5,11 @@ import { site } from '../data/site';
 
 /**
  * Uses the reversed logo. The original's machine mark and the word "VENDING"
- * are both #272727, identical to the dark surface, so on this header they were
- * invisible and only the orange "PM" showed. No background shade fixes that:
- * the surface would have to lighten to roughly #6E6E6E before the charcoal
- * separated, and body text drops below AA well before that. Recolouring the
- * charcoal to offwhite instead gives 13.61:1 and leaves the palette intact.
+ * are both #272727, which against this dark surface measures 1.10:1, so on the
+ * header they were invisible and only the orange "PM" showed. No background
+ * shade fixes that: the surface would have to lighten to roughly #6E6E6E before
+ * the charcoal separated, and body text drops below AA well before that.
+ * Recolouring the charcoal to offwhite instead gives 12.37:1.
  *
  * There is no mobile menu: three anchors and a single action do not justify a
  * disclosure widget or the JavaScript to run it. Below `sm` the anchors give way

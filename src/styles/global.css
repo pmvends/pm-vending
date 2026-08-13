@@ -37,7 +37,7 @@
   }
 
   /* The ink focus ring is invisible on the dark surface, so that scope swaps in
-     the accent orange (7.71:1 against #272727). */
+     the accent orange (7.01:1 against #2e2e2e). */
   [data-surface="dark"] {
     --color-focus: var(--color-accent);
   }
