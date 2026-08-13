@@ -13,8 +13,10 @@
   --color-background: #f6f4f1;
   --color-background-subtle: #efece7;
   --color-surface: #ffffff;
-  --color-surface-dark: #272727;
-  --color-surface-dark-subtle: #333231;
+  /* A step lighter than the logo's #272727. The reversed logo is what makes the
+     mark legible here; this is a tonal choice, not the fix. */
+  --color-surface-dark: #2e2e2e;
+  --color-surface-dark-subtle: #3a3937;
 
   /* --- Foreground ----------------------------------------------------- */
   /* ink on background 15.67:1 | muted 6.63:1 | subtle 5.18:1 */

@@ -77,3 +77,20 @@ cover what it cannot:
 
 Sections marked `data-surface="dark"` swap the focus ring and link colours,
 because the light-surface ink is invisible against charcoal.
+
+## Logo files
+
+| File | Use |
+| --- | --- |
+| `assets/logo.png` | The original. Light backgrounds only, plus the schema.org logo URL. |
+| `assets/logo-on-dark.png` | Reversed variant for the dark header. |
+
+The original's machine mark and the word "VENDING" are `#272727`, the same
+value as the dark surface, so on a dark background only the orange "PM" shows.
+No background shade fixes this: the surface would need to lighten to roughly
+`#6E6E6E` before the charcoal separated, and body text fails AA well before
+that. The reversed file recolours only the charcoal to offwhite and leaves both
+oranges untouched.
+
+If the logo is ever redrawn, regenerate the reversed copy rather than editing it
+by hand, so the two cannot drift apart.
